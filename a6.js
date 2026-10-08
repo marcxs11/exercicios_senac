@@ -12,3 +12,4 @@ else if (nota >= 5) {
 else {
     console.log("Reprovado.")
 }
+ 
