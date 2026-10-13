@@ -1,9 +1,9 @@
-import {number, input, inquirer} from '@inquirer/prompts'
+import {number, inquirer} from '@inquirer/prompts'
 
 let total = 0;
-let brt = 0;
-let med = 0;
-let car = 0;
+let quantidadebrt = 0;
+let quantidademed = 0;
+let quantidadecar = 0;
 
 const resposta = await inquirer.prompt([
     {
@@ -43,6 +43,7 @@ if (preço <= 50) {
 
 } else {
     console.log("Categoria: Caro")
+    quantidadecar++;
 }
 
 

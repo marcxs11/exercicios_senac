@@ -1,8 +1,8 @@
 import inquirer from "inquirer"; 
 let total = 0; 
-let qtdBarato = 0; 
-let qtdMedio = 0; 
-let qtdCaro = 0; 
+let qtdbarato = 0; 
+let qtdmedio = 0; 
+let qtdcaro = 0; 
 const resposta = await inquirer.prompt([ 
 {
 type: "input",
@@ -12,12 +12,12 @@ message: "Quantos produtos?"
 ]);
 
 const quantidade = Number(resposta.quantidade); 
-for (let i = 1; i <= quantidade; i++) { 
+for (let x = 1; x <= quantidade; x++) { 
 const dados = await inquirer.prompt([
 {
 type: "input",
 name: "nome",
-message: `Nome do produto ${i}:`
+message: `Nome do produto ${x}:`
 },
 {
 type: "input",
@@ -30,19 +30,19 @@ const preco = Number(dados.preco);
 total += preco; 
 if (preco <= 50) { 
 console.log("Categoria: Barato");
-qtdBarato++;
+qtdbarato++;
 } else if (preco <= 100) { 
 console.log("Categoria: Médio");
-qtdMedio++;
+qtdmedio++;
 } else { 
 console.log("Categoria: Caro");
-qtdCaro++;
+qtdcaro++;
 }
 }
 
 console.log("\n--- RESUMO ---");
 console.log(`Total: R$ ${total.toFixed(2)}`);
-console.log(`Baratos: ${qtdBarato}`);
-console.log(`Médios: ${qtdMedio}`);
+console.log(`Baratos: ${qtdbarato}`);
+console.log(`Médios: ${qtdmedio}`);
 
-console.log(`Caros: ${qtdCaro}`);
+console.log(`Caros: ${qtdcaro}`);
