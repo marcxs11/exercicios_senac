@@ -3,19 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Exercício de formulário de login com validação em JavaScript.">
-  <title>Acesso | Área do aluno</title>
+  <meta name="description" content="Exercício de lista dinâmica com JavaScript.">
+  <title>Lista dinâmica</title>
   <style>
     :root {
       color-scheme: light;
-      --ink: #292117;
+      --ink: #884404;
       --muted: #010c08;
-      --paper: #f5f7f2;
+      --paper: #573c03dc;
       --white: #ffffff;
-      --green: #cf6106;
-      --green-dark: #c96c15;
-      --line: #dbe9e0;
-      --error: #a10e09;
+      --green: #25274b;
+      --green-dark: #790101e3;
+      --line: #ffd000;
     }
 
     * { box-sizing: border-box; }
@@ -28,9 +27,9 @@
       padding: 32px 18px;
       color: var(--ink);
       background-color: var(--paper);
-      background-image: radial-gradient(#cbd9ce 0.8px, transparent 0.8px);
+      background-image: radial-gradient(#026b0b 0.9px, transparent 0.9px);
       background-size: 19px 19px;
-      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
     }
 
     .painel {
@@ -50,26 +49,16 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 42px;
+      padding: 43px;
       color: var(--white);
       background: var(--green-dark);
-    }
-
-    .selo {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgb(238, 183, 4);
-      border-radius: 50%;
-      font-size: 20px;
     }
 
     .marca h1 {
       max-width: 290px;
       margin: 0 1 14px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 50px;
+      font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-size: 45px;
       font-weight: 500;
       line-height: 1.10;
     }
@@ -133,27 +122,24 @@
     .aviso {
       min-height: 24px;
       margin: 12px 0 0;
-      color: var(--error);
       font-size: 14px;
     }
 
-    .dica {
-      margin: 18px 0 0;
-      padding-top: 15px;
-      color: var(--muted);
-      border-top: 1px solid var(--line);
-      font-size: 13px;
-      line-height: 1.6;
+    .aviso:empty { display: none; }
+    .aviso:not(:empty) { color: var(--green-dark); }
+
+    ul {
+      display: grid;
+      gap: 8px;
+      padding-left: 22px;
     }
 
-    .dica strong { color: var(--ink); }
-
-    .boas-vindas { text-align: left; }
-    .boas-vindas .selo { margin-bottom: 30px; color: var(--green); border-color: var(--line); }
-    .boas-vindas p:not(.etiqueta) { color: var(--muted); line-height: 1.6; }
-    .boas-vindas button { margin-top: 20px; }
-
-    [hidden] { display: none !important; }
+    li {
+      padding: 9px 12px;
+      background: #f3f6f2;
+      border-radius: 5px;
+      overflow-wrap: anywhere;
+    }
 
     @keyframes surgir {
       from { opacity: 0; transform: translateY(10px); }
@@ -178,74 +164,56 @@
   <main class="painel">
     <aside class="marca" aria-label="Área do aluno">
       <div>
-        <h1>Hora de retomar os estudos!</h1>
-        <p>Entre para continuar de onde você parou.</p>
+        <h1>Lista dinâmica</h1>
+        <h2>Adicione seus itens à lista!</h2>
       </div>
-      <small>Exercícios de HTML e JavaScript</small>
+
     </aside>
 
-    <section class="conteudo" aria-live="polite">
-      <div class="form-area" id="area-login">
-        <p class="etiqueta">Área do aluno</p>
-        <h2>Fazer login</h2>
-        <p class="introducao">Insira seus <strong>dados</strong> para acessar.</p>
+    <section class="conteudo">
+      <div class="form-area">
+        <h2>Minha lista</h2> <!-- Exibe o título da lista. -->
+        <p class="introducao">Digite seu item e clique em Adicionar.</p> <!-- Orienta o usuário sobre o uso. -->
 
-        <form id="form-login">
-          <div class="campo">
-            <label for="usuario">Usuário</label>
-            <input id="usuario" name="usuario" type="text" autocomplete="username" required>
-          </div>
-          <div class="campo">
-            <label for="senha">Senha</label>
-            <input id="senha" name="senha" type="password" autocomplete="current-password" required>
-          </div>
-          <button type="submit">Entrar</button>
-          <p class="aviso" id="mensagem" role="alert"></p>
+        <form id="form-lista"> <!-- Agrupa o campo e o botão; também permite adicionar com Enter. -->
+          <div class="campo"> <!-- Agrupa o rótulo e o campo de texto para aplicar o estilo. -->
+            <label for="item">Novo item</label> <!-- Associa um texto descritivo ao campo. -->
+            <input id="item" name="item" type="text" autocomplete="off"> <!-- Recebe o texto que será adicionado. -->
+          </div> <!-- Encerra o grupo do campo de texto. -->
+          <button type="submit">Adicionar</button> <!-- Envia o formulário para incluir o item na lista. -->
+          <p class="aviso" id="mensagem" role="status" aria-live="polite"></p> <!-- Mostra avisos acessíveis sem interromper o usuário. -->
         </form>
 
-        <p class="dica">Acesso para testar: usuário <strong>aluno</strong> e senha <strong>senac123</strong>.</p>
-      </div>
-
-      <div class="form-area boas-vindas" id="area-protegida" hidden>
-        <div class="selo" aria-hidden="true">✓</div>
-        <p class="etiqueta">Acesso autorizado</p>
-        <h2>Bem-vindo, aluno!</h2>
-        <p>Retome seus estudos de onde você parou.</p>
-        <button id="botao-sair" type="button">Sair</button>
+        <ul id="lista-itens" aria-label="Itens adicionados"></ul> <!-- Recebe os elementos li criados pelo JavaScript. -->
       </div>
     </section>
   </main>
 
   <script>
-const formLogin = document.querySelector("#form-login");
-const campoUsuario = document.querySelector("#usuario");
-const campoSenha = document.querySelector("#senha");
-const mensagem = document.querySelector("#mensagem");
-const areaLogin = document.querySelector("#area-login");
-const areaProtegida = document.querySelector("#area-protegida");
+const formulario = document.querySelector("#form-lista"); // Localiza o formulário para escutar o envio.
+const campoItem = document.querySelector("#item"); // Localiza o campo onde o usuário digita.
+const listaItens = document.querySelector("#lista-itens"); // Localiza a lista que receberá os novos itens.
+const mensagem = document.querySelector("#mensagem"); // Localiza a área que exibirá mensagens.
 
-formLogin.addEventListener("submit", (evento) => {
-  evento.preventDefault();
+formulario.addEventListener("submit", (evento) => { // Executa esta função ao clicar em Adicionar ou pressionar Enter.
+  evento.preventDefault(); // Impede o navegador de recarregar a página ao enviar o formulário.
 
-  if (campoUsuario.value.trim() === "aluno" && campoSenha.value === "senac123") {
-    mensagem.textContent = "";
-    areaLogin.hidden = true;
-    areaProtegida.hidden = false;
-    areaProtegida.querySelector("button").focus();
-    return;
-  }
+  const texto = campoItem.value.trim(); // Lê o campo e remove espaços em branco do começo e do fim.
 
-  mensagem.textContent = "Usuário ou senha incorretos. Tente novamente.";
-  campoSenha.value = "";
-  campoSenha.focus();
-});
+  if (texto === "") { // Verifica se o campo está vazio ou contém apenas espaços.
+    mensagem.textContent = "Digite um item antes de adicionar."; // Informa que é necessário escrever algo.
+    campoItem.focus(); // Devolve o cursor ao campo para facilitar a correção.
+    return; // Encerra a função sem criar um item vazio.
+  } // Encerra a verificação de entrada vazia.
 
-document.querySelector("#botao-sair").addEventListener("click", () => {
-  areaProtegida.hidden = true;
-  areaLogin.hidden = false;
-  formLogin.reset();
-  campoUsuario.focus();
-});
+  const novoItem = document.createElement("li"); // Cria um novo elemento li na memória do navegador.
+  novoItem.textContent = texto; // Coloca o texto digitado dentro do novo elemento.
+  listaItens.append(novoItem); // Insere o li no final da lista visível na página.
+
+  mensagem.textContent = `Item "${texto}" adicionado à lista.`; // Confirma que o item foi incluído.
+  formulario.reset(); // Limpa o campo depois de adicionar o item.
+  campoItem.focus(); // Deixa o cursor pronto para digitar o próximo item.
+}); // Encerra o evento de envio do formulário.
 
   </script>
 </body>
