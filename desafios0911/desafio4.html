@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de cliques</title>
+</head>
+<body>
+    <h1>Contador de cliques</h1>
+    <p>Cliques: <span id="contador" aria-live="polite">0</span></p>
+    <button type="button" id="adicionar">Adicionar</button>
+    <button type="button" id="zerar">Zerar</button>
+
+    <script>
+        const contador = document.querySelector("#contador");
+        const botaoAdicionar = document.querySelector("#adicionar");
+        const botaoZerar = document.querySelector("#zerar");
+        let cliques = 0;
+
+        botaoAdicionar.addEventListener("click", () => {
+            cliques += 1;
+            contador.textContent = cliques;
+        });
+
+        botaoZerar.addEventListener("click", () => {
+            cliques = 0;
+            contador.textContent = cliques;
+        });
+    </script>
+</body>
+</html>

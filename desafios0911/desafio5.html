@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar cor da caixa</title>
+</head>
+<body>
+    <h1>Alterar cor da caixa</h1>
+    <div id="caixa" style="width: 200px; height: 150px; background-color: lightblue;"></div>
+    <button type="button" id="alterarCor">Alterar cor</button>
+
+    <script>
+        const caixa = document.querySelector("#caixa");
+        const botaoAlterarCor = document.querySelector("#alterarCor");
+        const cores = ["red", "blue", "yellow"];
+        let indiceCor = 0;
+
+        botaoAlterarCor.addEventListener("click", () => {
+            indiceCor = (indiceCor + 1) % cores.length;
+            caixa.style.backgroundColor = cores[indiceCor];
+        });
+    </script>
+</body>
+</html>

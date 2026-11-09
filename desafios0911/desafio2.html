@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Somar valores</title>
+</head>
+<body>
+    <h1>Somar valores</h1>
+
+    <form id="formulario">
+        <label for="valor1">Número:</label>
+        <input type="number" id="valor1" step="any" required>
+
+        <label for="valor2">Número:</label>
+        <input type="number" id="valor2" step="any" required>
+
+        <button type="submit">Somar</button>
+    </form>
+
+    <div id="retorno" aria-live="polite"></div>
+
+    <script>
+const formulario = document.querySelector("#formulario");
+const campoValor1 = document.querySelector("#valor1");
+const campoValor2 = document.querySelector("#valor2");
+const resultado = document.querySelector("#resultado");
+
+formulario.addEventListener("submit", (evento) => {
+    evento.preventDefault();
+
+    const valor1 = Number(campoValor1.value);
+    const valor2 = Number(campoValor2.value);
+    const soma = valor1 + valor2;
+
+    retorno.textContent = `Resultado: ${soma}`;
+});
+    </script>
+</body>
+</html>
